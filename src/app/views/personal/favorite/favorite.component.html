@@ -2,7 +2,10 @@
   <div class="container">
     <div class="favorite-title">Избранное</div>
 
-    <div class="favorite-empty" *ngIf="!products || (products && products.length === 0)">
+    <div
+      class="favorite-empty"
+      *ngIf="!products || (products && products.length === 0)"
+    >
       <div>В избранном нет товаров</div>
       <button class="button" routerLink="/catalog">В каталог</button>
     </div>
@@ -16,10 +19,26 @@
         <div class="favorite-product-name">{{ product.name }}</div>
         <div class="favorite-product-price">{{ product.price }} BYN</div>
         <div class="favorite-product-action">
-          <button class="button" routerLink="/product/{{ product.url }}">
-            Открыть
+          <button
+            class="button"
+            (click)="addToCart(product)"
+            *ngIf="!product.isInCart"
+          >
+            В корзину
+          </button>
+          <button
+            class="button button-transparent button-in-cart"
+            *ngIf="product.isInCart"
+            (click)="removeFromCart(product)"
+          >
+            <span>В корзине</span>
+            <span>Удалить</span>
           </button>
         </div>
+        <count-selector
+          [count]="product.countInCart  ?? 1"
+          (onCountChange)="updateCount(product, $event)"
+        ></count-selector>
         <div
           class="favorite-product-remove"
           (click)="removeFromFavorites(product.id)"
