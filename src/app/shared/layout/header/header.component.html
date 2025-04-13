@@ -90,7 +90,7 @@
               <span (click)="logout()">Выйти</span>
             </button>
           </mat-menu>
-          <a routerLink="/favorite">
+          <a routerLink="/favorite" *ngIf="isLogged">
             <svg
               width="24"
               height="24"
