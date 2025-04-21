@@ -137,7 +137,7 @@
       <div
         class="pagination-arrow"
         [class.disabled]="
-          activeParams.page ? activeParams.page === pages.length : true
+          activeParams.page ? activeParams.page === pages.length : false
         "
         (click)="openNextPage()"
       >

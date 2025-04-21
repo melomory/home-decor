@@ -244,6 +244,10 @@ export class CatalogComponent implements OnInit {
   }
 
   openNextPage() {
+    if (!this.activeParams.page) {
+      this.activeParams.page = 1;
+    }
+
     if (this.activeParams.page && this.activeParams.page < this.pages.length) {
       this.activeParams.page++;
       this.router.navigate(["/catalog"], {
