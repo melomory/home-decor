@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { debounceTime } from "rxjs";
 import { AuthService } from "src/app/core/auth/auth.service";
@@ -207,6 +207,13 @@ export class CatalogComponent implements OnInit {
     this.router.navigate(["/catalog"], {
       queryParams: this.activeParams,
     });
+  }
+
+  @HostListener("document:click", ["$event"])
+  click(event: Event) {
+    if (this.sortingOpen && !(event.target as HTMLElement).closest(".catalog-sorting")) {
+      this.sortingOpen = false;
+    }
   }
 
   toggleSorting() {
