@@ -55,10 +55,19 @@ export class HeaderComponent implements OnInit {
       }
     });
 
+    this.getCountCart();
+
     this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
       this.isLogged = isLoggedIn;
+      this.getCountCart();
     });
 
+    this.cartService.count$.subscribe((count) => {
+      this.count = count;
+    });
+  }
+
+  getCountCart(): void {
     this.cartService
       .getCartCount()
       .subscribe((data: { count: number } | DefaultResponseType) => {
@@ -68,10 +77,6 @@ export class HeaderComponent implements OnInit {
 
         this.count = (data as { count: number }).count;
       });
-
-    this.cartService.count$.subscribe((count) => {
-      this.count = count;
-    });
   }
 
   logout(): void {

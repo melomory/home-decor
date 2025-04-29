@@ -6,7 +6,7 @@
 >
   <div
     class="product-card-favorite"
-    *ngIf="!isLight"
+    *ngIf="!isLight && isLogged"
     (click)="updateFavorite()"
   >
     <span *ngIf="!product.isInFavorite"

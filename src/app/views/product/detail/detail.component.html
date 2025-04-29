@@ -178,6 +178,7 @@
         </div>
         <div class="detail-info-actions">
           <button
+            *ngIf="isLogged"
             class="button button-transparent button-icon"
             (click)="updateFavorite()"
           >
